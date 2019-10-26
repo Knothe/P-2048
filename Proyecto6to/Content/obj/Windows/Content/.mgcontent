@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Background.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/File.spritefont</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/IconTest.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/MainGame.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/MainTitle.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Restart.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Restart2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Restart3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Return.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Return2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Return3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Save.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Save2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Save3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile1.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile10.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile11.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile12.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile2.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile4.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile5.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile6.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile7.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile8.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile9.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
