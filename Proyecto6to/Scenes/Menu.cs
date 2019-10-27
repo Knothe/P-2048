@@ -15,13 +15,16 @@ namespace Proyecto6to.Scenes
 
         private Texture2D backGround;
         private Texture2D title;
+        private Texture2D notLoad;
         private Button load;
         private Button start;
+        private bool hasLoad;
 
-        public Menu()
+        public Menu(bool hasFile)
         {
             start = new Button(new Vector2(480, 384), new Vector2(.5f, .5f));
             load = new Button(new Vector2(480, 565), new Vector2(.5f, .5f));
+            hasLoad = true;
         }
 
         public override void Init()
@@ -33,15 +36,20 @@ namespace Proyecto6to.Scenes
         {
             backGround = game.Content.Load<Texture2D>("Background");
             title = game.Content.Load<Texture2D>("MainTitle");
-            load.Load(game, "Load", "Load2", "Load3");
+            if (hasLoad)
+                load.Load(game, "Load", "Load2", "Load3");
+            else
+                notLoad = game.Content.Load<Texture2D>("LoadGRay");
             start.Load(game, "Start", "Start2", "Start3");
         }
         public override int Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
-            if(load.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
-                return 1;
+            if (hasLoad) {
+                if (load.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
+                    return 1;
+            }
             if(start.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
                 return 1;
             
@@ -51,7 +59,10 @@ namespace Proyecto6to.Scenes
         {
             spriteBatch.Draw(backGround, new Vector2(-720, -384), scale: new Vector2(1.5f, 1.5f));
             spriteBatch.Draw(title, new Vector2(240, 30));
-            load.Draw(spriteBatch);
+            if (hasLoad)
+                load.Draw(spriteBatch);
+            else
+                spriteBatch.Draw(notLoad, new Vector2(480, 565), scale: new Vector2(.5f, .5f));
             start.Draw(spriteBatch);
         }
         public override void Destroy()

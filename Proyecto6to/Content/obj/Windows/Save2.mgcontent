@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Save2.png</SourceFile>
-  <SourceTime>2019-10-26T16:18:57.5097841-05:00</SourceTime>
+  <SourceTime>2019-10-26T16:28:10.5468996-05:00</SourceTime>
   <DestFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/bin/Windows/Save2.xnb</DestFile>
-  <DestTime>2019-10-26T16:25:30.160963-05:00</DestTime>
+  <DestTime>2019-10-26T21:43:51.7254815-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

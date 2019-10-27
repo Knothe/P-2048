@@ -13,6 +13,7 @@ namespace Proyecto6to.Scenes
     class GameState : Scene
     {
         private SpriteFont font;
+        private SpriteFont smallFont;
         private Texture2D backGround;
         private Texture2D icon;
         private Texture2D title;
@@ -25,6 +26,8 @@ namespace Proyecto6to.Scenes
         private bool mousePressed = false;
         private Vector2 mousePos;
         private const double radToAngle = 180 / Math.PI;
+        private bool moved;
+        private int highScore, score;
 
         public override void Init()
         {
@@ -33,6 +36,9 @@ namespace Proyecto6to.Scenes
 
         public GameState()
         {
+            highScore = 0;
+            score = 0;
+            moved = false;
             back = new Button(new Vector2(1136, 598), new Vector2(1, 1));
             reload = new Button(new Vector2(1288, 598), new Vector2(1, 1));
             save = new Button(new Vector2(30, 598), new Vector2(1, 1));
@@ -48,13 +54,13 @@ namespace Proyecto6to.Scenes
             tileNumber[0, 2] = 0;
             tileNumber[0, 3] = 0;
             tileNumber[1, 0] = 0;
-            tileNumber[1, 1] = 0;
-            tileNumber[1, 2] = 1;
-            tileNumber[1, 3] = 0;
-            tileNumber[2, 0] = 0;
-            tileNumber[2, 1] = 0;
-            tileNumber[2, 2] = 0;
-            tileNumber[2, 3] = 1;
+            //tileNumber[1, 1] = 0;
+            //tileNumber[1, 2] = 1;
+            //tileNumber[1, 3] = 0;
+            //tileNumber[2, 0] = 0;
+            //tileNumber[2, 1] = 0;
+            //tileNumber[2, 2] = 0;
+            //tileNumber[2, 3] = 1;
             tileNumber[3, 0] = 0;
             tileNumber[3, 1] = 0;
             tileNumber[3, 2] = 0;
@@ -64,6 +70,7 @@ namespace Proyecto6to.Scenes
 
         public override void Load(Game game)
         {
+            //ModifySaveFile.SaveFile(highScore, tileNumber);
             backGround = game.Content.Load<Texture2D>("Background");
             icon = game.Content.Load<Texture2D>("IconTest");
             back.Load(game, "Return", "Return2", "Return3");
@@ -71,6 +78,7 @@ namespace Proyecto6to.Scenes
             save.Load(game, "Save", "Save2", "Save3");
             title = game.Content.Load<Texture2D>("MainTitle");
             font = game.Content.Load<SpriteFont>("File");
+            smallFont = game.Content.Load<SpriteFont>("TextoPequeño");
             grid = game.Content.Load<Texture2D>("MainGame");
             tileList[0] = game.Content.Load<Texture2D>("Tile1");
             tileList[1] = game.Content.Load<Texture2D>("Tile2");
@@ -113,7 +121,8 @@ namespace Proyecto6to.Scenes
             return 0;
         }
         public override void Draw(SpriteBatch spriteBatch)
-        {
+        { 
+            
             spriteBatch.Draw(backGround, new Vector2(0, 0), scale: new Vector2(.75f, .75f));
             spriteBatch.Draw(grid, new Vector2(336, 0));
 
@@ -127,6 +136,9 @@ namespace Proyecto6to.Scenes
             }
             spriteBatch.Draw(title, new Vector2(25, 75), scale: new Vector2(.3f, .3f));
             spriteBatch.DrawString(font, "High\nScore", new Vector2(1136, 50), Color.White);
+            spriteBatch.DrawString(smallFont, "" + highScore, new Vector2(1136, 160), Color.White);
+            spriteBatch.DrawString(font, "\nScore", new Vector2(1288, 50), Color.White);
+            spriteBatch.DrawString(smallFont, "" + score, new Vector2(1288, 160), Color.White);
             back.Draw(spriteBatch);
             reload.Draw(spriteBatch);
             save.Draw(spriteBatch);
@@ -143,177 +155,263 @@ namespace Proyecto6to.Scenes
             if(newMousePos.Length() > 0)
             {
                 angle *= radToAngle;
-                if (angle <= 22.5 && angle >= -22.5) Move0(); //Derecha
-                else if (angle <= -22.5 && angle >= -67.5) Move1(); //Arriba derecha
-                else if (angle <= -67.5 && angle >= -112.5) Move2(); //Arriba 
-                else if (angle <= -112.5 && angle >= -157.5) Move3(); //Arriba izquierda
-                else if (angle <= -157.5 || angle >= 157.5) Move4(); //Izquierda
-                else if (angle <= 157.5 && angle >= 112.5) Move5(); //Izquierda abajo
-                else if (angle <= 112.5 && angle >= 67.5) Move6(); //Abajo
-                else Move7(); //Izquierda derecha
+                if (angle <= 22.5 && angle >= -22.5) moved = Move0(); //Derecha
+                else if (angle <= -22.5 && angle >= -67.5) moved = Move1(); //Arriba derecha
+                else if (angle <= -67.5 && angle >= -112.5) moved = Move2(); //Arriba 
+                else if (angle <= -112.5 && angle >= -157.5) moved = Move3(); //Arriba izquierda
+                else if (angle <= -157.5 || angle >= 157.5) moved = Move4(); //Izquierda
+                else if (angle <= 157.5 && angle >= 112.5) moved = Move5(); //Izquierda abajo
+                else if (angle <= 112.5 && angle >= 67.5) moved = Move6(); //Abajo
+                else moved = Move7(); //Izquierda derecha
             }
             
         }
         // Derecha
-        private void Move0() { 
+        private bool Move0() {
+            int k, tileVal;
+            bool wasMoved = false; ;
             for (int i = 3; i >= 0; i--) {
                 for (int j = 3; j >= 0; j--) {
-                    if (tileNumber[j, i] != -1)
-                    {
-                        for (int k = j - 1; k >= 0; k--)
-                        {
-                            if (tileNumber[k, i] != -1)
-                            {
-                                if (tileNumber[j, i] == tileNumber[k, i])
-                                {
-                                    tileNumber[j, i]++;
-                                    tileNumber[k, i] = -1;
+                    if (tileNumber[j, i] != -1) {
+                        if (j != 0) {
+                            for (k = j - 1; k >= 0; k--) {
+                                if (tileNumber[k, i] != -1){
+                                    if (tileNumber[j, i] == tileNumber[k, i]) {
+                                        tileNumber[j, i]++;
+                                        tileNumber[k, i] = -1;
+                                        score += tileNumber[j, i];
+                                        wasMoved = true;
+                                    }
+                                    k = -1;
                                 }
-                                k = -1;
                             }
                         }
-                    }
-                }
-                for(int j = 2; j >= 0; j--) {
-                    if(tileNumber[j, i] != -1) {
-                        for (int k = 3; k > j; k--) {
+                        tileVal = tileNumber[j, i];
+                        for(k = j + 1; k < 4; k++) {
                             if (tileNumber[k, i] == -1) {
-                                tileNumber[k, i] = tileNumber[j, i];
-                                tileNumber[j, i] = -1;
+                                tileNumber[k, i] = tileVal;
+                                tileNumber[k - 1, i] = -1;
+                                wasMoved = true;
                             }
+                            else {
+                                k--;
+                                break;
+                            }  
                         }
                     }
                 }
             }
+            return wasMoved;
         }
         // Arriba derecha
-        private void Move1() {
+        private bool Move1() {
+            return false;
         }
+        /*
+       0,0    1,0    2,0    3,0
+       0,1    1,1    2,1    3,1
+       0,2    1,2    2,2    3,2
+       0,3    1,3    2,3    3,3
+       */
         // Arriba
-        private void Move2() { 
+        private bool Move2() {
+            int k, tileVal;
+            bool wasMoved = false; ;
             for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < 4; j++) {
                     if (tileNumber[i, j] != -1) {
-                        for (int k = j + 1; k < 4; k++) {
-                            if (tileNumber[i, k] != -1) {
-                                if (tileNumber[i, j] == tileNumber[i, k]) {
-                                    tileNumber[i, j]++;
-                                    tileNumber[i, k] = -1;
+                        if (j != 3) {
+                            for (k = j + 1; k < 4; k++) {
+                                if (tileNumber[i, k] != -1) {
+                                    if (tileNumber[i, j] == tileNumber[i, k]) {
+                                        tileNumber[i, j]++;
+                                        tileNumber[i, k] = -1;
+                                        score += tileNumber[i, j];
+                                        wasMoved = true;
+                                    }
+                                    k = 5;
                                 }
-                                k = 5;
                             }
                         }
-                    }
-                }
-                for (int j = 1; j < 4; j++) {
-                    if (tileNumber[i, j] != -1) {
-                        for (int k = 0; k < j; k++) {
+                        tileVal = tileNumber[i, j];
+                        for (k = j - 1; k >= 0; k--) {
                             if (tileNumber[i, k] == -1) {
-                                tileNumber[i, k] = tileNumber[i, j];
-                                tileNumber[i, j] = -1;
+                                tileNumber[i, k] = tileVal;
+                                tileNumber[i, k + 1] = -1;
+                                wasMoved = true;
+                            }
+                            else {
+                                k++;
+                                break;
                             }
                         }
                     }
                 }
             }
+            return wasMoved;
         }
         // Arriba izquierda
-        private void Move3() {
-        }
-        // Izquierda
-        private void Move4() { 
+        private bool Move3() {
+            int unir, mover, tileVal, k;
+            bool wasMoved = false;
             for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if(tileNumber[j,i] != -1) {
-                        for(int k = j + 1; k < 4; k++) {
-                            if(tileNumber[k, i] != -1) {
-                                if (tileNumber[j, i] == tileNumber[k, i]) {
-                                    tileNumber[j, i]++;
-                                    tileNumber[k, i] = -1;
+                for (int j = 0; j < 4; j++) {
+                    if (tileNumber[i, j] != -1) {
+                        if (i >= j) {
+                            unir = 3 - i;
+                            mover = j;
+                        }
+                        else {
+                            unir = 3 - j;
+                            mover = i;
+                        }
+                        for (k = 1; k <= unir; k++) {
+                            if (tileNumber[i + k, j + k] != -1) {
+                                if (tileNumber[i, j] == tileNumber[i + k, j + k]) {
+                                    tileNumber[i, j]++;
+                                    score += tileNumber[i, j];
+                                    tileNumber[i + k, j + k] = -1;
+                                    wasMoved = true;
                                 }
                                 k = 5;
                             }
                         }
-                    }
-                }
-                for (int j = 1; j < 4; j++)  {
-                    if (tileNumber[j, i] != -1)
-                    {
-                        for (int k = 0; k < j; k++)
-                        {
-                            if (tileNumber[k, i] == -1)
-                            {
-                                tileNumber[k, i] = tileNumber[j, i];
-                                tileNumber[j, i] = -1;
+                        tileVal = tileNumber[i, j];
+                        for (k = 1; k <= mover; k++) {
+                            if (tileNumber[i - k, j - k] == -1) {
+                                tileNumber[i - k, j - k] = tileVal;
+                                tileNumber[i - k + 1, j - k + 1] = -1;
+                                wasMoved = true;
+                            }
+                            else {
+                                break;
                             }
                         }
                     }
                 }
             }
+            return wasMoved;
+        }
+        // Izquierda
+        private bool Move4() {
+            int k, tileVal;
+            bool wasMoved = false;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (tileNumber[j, i] != -1) {
+                        if (j != 3) {
+                            for (k = j + 1; k < 4; k++) {
+                                if (tileNumber[k, i] != -1) {
+                                    if (tileNumber[j, i] == tileNumber[k, i]) {
+                                        tileNumber[j, i]++;
+                                        score += tileNumber[j, i];
+                                        tileNumber[k, i] = -1;
+                                        wasMoved = true;
+                                    }
+                                    k = 5;
+                                }
+                            }
+                        }
+                        tileVal = tileNumber[j, i];
+                        for (k = j - 1; k >= 0; k--) {
+                            if (tileNumber[k, i] == -1) {
+                                tileNumber[k, i] = tileVal;
+                                tileNumber[k + 1, i] = -1;
+                                wasMoved = true;
+                            }
+                            else {
+                                k++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            return wasMoved;
         }
         // Abajo izquierdo
-        private void Move5() {
+        private bool Move5() {
+            return false;
         }
         // Abajo
-        private void Move6() { 
-            for (int i = 3; i >= 0; i--) {
-                for (int j = 3; j > 0; j--) {
+        private bool Move6() {
+            int k, tileVal;
+            bool wasMoved = false;
+            for (int i = 3; i >= 0; i--){
+                for (int j = 3; j >= 0; j--) {
                     if (tileNumber[i, j] != -1) {
-                        for (int k = j - 1; k >= 0; k--)  {
-                            if (tileNumber[i, k] != -1) {
-                                if (tileNumber[i, j] == tileNumber[i, k])
-                                {
-                                    tileNumber[i, j]++;
-                                    tileNumber[i, k] = -1;
+                        if (j != 0) {
+                            for (k = j - 1; k >= 0; k--) {
+                                if (tileNumber[i, k] != -1)  {
+                                    if (tileNumber[i, j] == tileNumber[i, k]) {
+                                        tileNumber[i, j]++;
+                                        score += tileNumber[i, j];
+                                        tileNumber[i, k] = -1;
+                                        wasMoved = true;
+                                    }
+                                    k = -1;
                                 }
-                                k = -1;
                             }
                         }
-                    }
-                }
-                for (int j = 2; j >= 0; j--) {
-                    if (tileNumber[i, j] != -1) {
-                        for (int k = 3; k > j; k--) {
+                        tileVal = tileNumber[i, j];
+                        for (k = j + 1; k < 4; k++) {
                             if (tileNumber[i, k] == -1) {
-                                tileNumber[i, k] = tileNumber[i, j];
-                                tileNumber[i, j] = -1;
+                                tileNumber[i, k] = tileVal;
+                                tileNumber[i, k - 1] = -1;
+                                wasMoved = true;
+                            }
+                            else {
+                                k--;
+                                break;
                             }
                         }
                     }
                 }
             }
+            return wasMoved;
         }
         // Abajo derecha
-        private void Move7() {
-            for(int i = 3; i >= 0; i--)
-            {
-                for(int j = 3; j >= 0; j--)
-                {
+        private bool Move7() {
+            int unir, mover, tileVal, k;
+            bool wasMoved = false;
+            for (int i = 3; i >= 0; i--) {
+                for(int j = 3; j >= 0; j--) {
                     if(tileNumber[i,j] != -1) {
-                        int dif;
-                        if (i <= j)
-                            dif = i;
-                        else
-                            dif = j;
-                        for (int k = 1; k <= dif; k++) {
+                        if (i <= j) {
+                            unir = i;
+                            mover = 3 - j;
+                        }
+                        else {
+                            unir = j;
+                            mover = 3 - i;
+                        }
+                        for (k = 1; k <= unir; k++) {
                             if (tileNumber[i - k, j - k] != -1) {
                                 if (tileNumber[i, j] == tileNumber[i - k, j - k]) {
                                     tileNumber[i, j]++;
+                                    score += tileNumber[i, j];
                                     tileNumber[i - k, j - k] = -1;
+                                    wasMoved = true;
                                 }
                                 k = 5;
+                            }
+                        }
+                        tileVal = tileNumber[i, j];
+                        for(k = 1; k <= mover; k++) {
+                            if(tileNumber[i+k, j + k] == -1) {
+                                tileNumber[i + k, j + k] = tileVal;
+                                tileNumber[i + k - 1, j + k - 1] = -1;
+                                wasMoved = true;
+                            }
+                            else {
+                                break;
                             }
                         }
                     }
                 }
             }
+            return wasMoved;
         }
-
-        /*
-         0,0    1,0    2,0    3,0
-         0,1    1,1    2,1    3,1
-         0,2    1,2    2,2    3,2
-         0,3    1,3    2,3    3,3
-         */
+        
     }
 }

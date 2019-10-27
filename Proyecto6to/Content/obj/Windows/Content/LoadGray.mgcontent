@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load3.png</SourceFile>
-  <SourceTime>2019-10-13T22:00:21.0733869-05:00</SourceTime>
-  <DestFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/bin/Windows/Load3.xnb</DestFile>
-  <DestTime>2019-10-26T21:43:51.4273152-05:00</DestTime>
+  <SourceFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/LoadGray.png</SourceFile>
+  <SourceTime>2019-10-26T12:38:55.2183671-05:00</SourceTime>
+  <DestFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/bin/Windows/Content/LoadGray.xnb</DestFile>
+  <DestTime>2019-10-26T21:44:59.1385323-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

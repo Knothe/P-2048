@@ -80,6 +80,18 @@
 /processorParam:TextureFormat=Color
 /build:Load3.png
 
+#begin LoadGray.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:LoadGray.png
+
 #begin MainGame.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -247,6 +259,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Start3.png
+
+#begin TextoPequeño.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:TextoPequeño.spritefont
 
 #begin Tile1.png
 /importer:TextureImporter

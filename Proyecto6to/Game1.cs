@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Proyecto6to
 {
     /// <summary>
@@ -14,6 +15,7 @@ namespace Proyecto6to
         Texture2D bg;
         Scenes.Menu menu;
         Scenes.GameState game;
+        string _fileName = "scores";
         enum GameState
         {
             MainMenu,
@@ -38,7 +40,7 @@ namespace Proyecto6to
         /// </summary>
         protected override void Initialize()
         {
-            menu = new Scenes.Menu();
+            menu = new Scenes.Menu(ModifySaveFile.FileExists());
             game = new Scenes.GameState();
             this.IsMouseVisible = true;
             base.Initialize();
@@ -50,6 +52,7 @@ namespace Proyecto6to
         /// </summary>
         protected override void LoadContent()
         {
+            
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             bg = Content.Load<Texture2D>("Background");

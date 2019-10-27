@@ -10,6 +10,7 @@
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load2.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/LoadGray.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/MainGame.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/MainTitle.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Restart.png</File>
@@ -24,6 +25,7 @@
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start2.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Start3.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/TextoPequeño.spritefont</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile1.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile10.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile11.png</File>
@@ -38,6 +40,8 @@
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile9.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/File.spritefont</SourceFile>
-  <SourceTime>2019-10-14T08:56:50.161812-05:00</SourceTime>
-  <DestFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/bin/Windows/File.xnb</DestFile>
-  <DestTime>2019-10-26T21:43:51.2417732-05:00</DestTime>
+  <SourceFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/TextoPequeño.spritefont</SourceFile>
+  <SourceTime>2019-10-26T20:24:30.8537277-05:00</SourceTime>
+  <DestFile>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/bin/Windows/Content/TextoPequeño.xnb</DestFile>
+  <DestTime>2019-10-26T20:24:32.8335381-05:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
