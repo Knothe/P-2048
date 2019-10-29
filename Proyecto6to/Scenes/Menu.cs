@@ -24,7 +24,7 @@ namespace Proyecto6to.Scenes
         {
             start = new Button(new Vector2(480, 384), new Vector2(.5f, .5f));
             load = new Button(new Vector2(480, 565), new Vector2(.5f, .5f));
-            hasLoad = true;
+            hasLoad = hasFile;
         }
 
         public override void Init()
@@ -48,7 +48,7 @@ namespace Proyecto6to.Scenes
             MouseState mouseState = Mouse.GetState();
             if (hasLoad) {
                 if (load.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
-                    return 1;
+                    return 2;
             }
             if(start.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
                 return 1;

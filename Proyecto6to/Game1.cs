@@ -87,6 +87,12 @@ namespace Proyecto6to
                     {
                         case 1:
                             state = GameState.Game;
+                            ModifySaveFile.DeleteFile();
+                            game.SetNewGame();
+                            break;
+                        case 2:
+                            state = GameState.Game;
+                            game.OpenSavedGame();
                             break;
                     }
                     break;
