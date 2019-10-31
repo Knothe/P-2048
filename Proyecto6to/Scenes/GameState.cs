@@ -18,9 +18,12 @@ namespace Proyecto6to.Scenes
         private Texture2D icon;
         private Texture2D title;
         private Texture2D grid;
+        private Texture2D gameOver;
+        private Texture2D gameOver2;
         private Texture2D[] tileList = new Texture2D[12];
         private int[,] tileNumber = new int[4, 4];
         private int[,] prevTileNumber = new int[4, 4];
+        
         private Button back;
         private Button reload;
         private Button save;
@@ -46,7 +49,6 @@ namespace Proyecto6to.Scenes
         }
         public override void Load(Game game)
         {
-            //ModifySaveFile.SaveFile(highScore, tileNumber);
             backGround = game.Content.Load<Texture2D>("Background");
             icon = game.Content.Load<Texture2D>("IconTest");
             back.Load(game, "Return", "Return2", "Return3");
@@ -56,6 +58,8 @@ namespace Proyecto6to.Scenes
             font = game.Content.Load<SpriteFont>("File");
             smallFont = game.Content.Load<SpriteFont>("TextoPequeño");
             grid = game.Content.Load<Texture2D>("MainGame");
+            gameOver = game.Content.Load<Texture2D>("GameOverScreen");
+            gameOver2 = game.Content.Load<Texture2D>("GameOverScreen2");
             tileList[0] = game.Content.Load<Texture2D>("Tile1");
             tileList[1] = game.Content.Load<Texture2D>("Tile2");
             tileList[2] = game.Content.Load<Texture2D>("Tile3");
@@ -83,6 +87,7 @@ namespace Proyecto6to.Scenes
             }
             prevScore = 0;
             score = 0;
+            lose = false;
             SetRandomTile();
         }
         public void OpenSavedGame()
@@ -93,15 +98,17 @@ namespace Proyecto6to.Scenes
         }
         private void SetRandomTile()
         {
+            int tileN = 0;
+            tileN = score / 200;
             Random r = new Random();
             bool wasAdded = false;
             int x, y;
             while (!wasAdded){
-                x = r.Next(0, 4); // Returns a random number from 0-99
+                x = r.Next(0, 4); 
                 y = r.Next(0, 4);
                 if (tileNumber[x, y] == -1)
                 {
-                    tileNumber[x, y] = 0;
+                    tileNumber[x, y] = r.Next(0, tileN + 1);
                     wasAdded = true;
                 }
             }
@@ -110,32 +117,37 @@ namespace Proyecto6to.Scenes
         public override int Update(GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();
-            if(back.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
+            if (!lose)
             {
-                mousePressed = false;
-                EqualTileNumbers(ref tileNumber, ref prevTileNumber);
-                score = prevScore;
+                if (save.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
+                {
+                    mousePressed = false;
+                    ModifySaveFile.SaveFile(score, tileNumber);
+                }
+                if (back.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
+                {
+                    mousePressed = false;
+                    EqualTileNumbers(ref tileNumber, ref prevTileNumber);
+                    score = prevScore;
+                }
+                if (!mousePressed && mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    mousePressed = true;
+                    mousePos = mouseState.Position.ToVector2();
+                }
+                else if (mouseState.LeftButton == ButtonState.Released && mousePressed)
+                {
+                    mousePressed = false;
+                    CheckMovement(mouseState.Position.ToVector2());
+                }
             }
+            
             if(reload.Update(mouseState.Position.ToVector2(), mouseState.LeftButton)){
                 mousePressed = false;
                 SetNewGame();
             }
-            if (save.Update(mouseState.Position.ToVector2(), mouseState.LeftButton))
-            {
-                mousePressed = false;
-                ModifySaveFile.SaveFile(score,tileNumber);
-            }
-            if(!mousePressed && mouseState.LeftButton == ButtonState.Pressed) {
-                mousePressed = true;
-                mousePos = mouseState.Position.ToVector2();
-            }else if(mouseState.LeftButton == ButtonState.Released && mousePressed) {
-                mousePressed = false;
-                CheckMovement(mouseState.Position.ToVector2());
-                if (isFull())
-                {
-                    lose = true;
-                }
-            }
+            
+            
             return 0;
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -158,8 +170,13 @@ namespace Proyecto6to.Scenes
             spriteBatch.DrawString(font, "\nScore", new Vector2(1288, 50), Color.White);
             spriteBatch.DrawString(smallFont, "" + score, new Vector2(1288, 160), Color.White);
             back.Draw(spriteBatch);
-            reload.Draw(spriteBatch);
             save.Draw(spriteBatch);
+            if (lose)
+            {
+                spriteBatch.Draw(gameOver2, new Vector2(0, 0), scale: new Vector2(2,2));
+                spriteBatch.Draw(gameOver, new Vector2(240, 128));
+            }
+            reload.Draw(spriteBatch);
         }
         public override void Destroy()
         {
@@ -183,20 +200,42 @@ namespace Proyecto6to.Scenes
         {
             for(int i = 0; i < 4; i++)
             {
-                for(int j =0; j < 4; j++)
+                for (int j = 0; j < 4; j++)
                 {
+                    if(i != 3 && j != 0)
+                    {
+                        if (tileNumber[i, j] == tileNumber[i + 1, j - 1])
+                            return false;
+                    }
+                    if(i != 3)
+                    {
+                        if (tileNumber[i, j] == tileNumber[i + 1, j])
+                            return false;
+                    }
+                    if(i != 3 && j != 3)
+                    {
+                        if (tileNumber[i, j] == tileNumber[i + 1, j + 1])
+                            return false;
+                    }
+                    if(j != 3)
+                    {
+                        if (tileNumber[i, j] == tileNumber[i, j + 1])
+                            return false;
+                    }
 
                 }
             }
             return true;
         }
+        
         private void CheckMovement(Vector2 newMousePos) {
+            int[,] prevTileProt = new int[4, 4];
             newMousePos.Y = newMousePos.Y - mousePos.Y;
             newMousePos.X = newMousePos.X - mousePos.X;
             double angle = Math.Atan2(newMousePos.Y, newMousePos.X);
             if(newMousePos.Length() > 0)
             {
-                EqualTileNumbers(ref prevTileNumber, ref tileNumber);
+                EqualTileNumbers(ref prevTileProt, ref tileNumber);
                 prevScore = score;
                 angle *= radToAngle;
                 if (angle <= 22.5 && angle >= -22.5) moved = Move0(); //Derecha
@@ -209,12 +248,18 @@ namespace Proyecto6to.Scenes
                 else moved = Move7(); //Izquierda derecha
             }
             if (moved) {
+                EqualTileNumbers(ref prevTileNumber, ref prevTileProt);
                 SetRandomTile();
                 moved = false;
                 if(score > highScore)
                 {
                     highScore = score;
                     ModifySaveFile.SaveHighScore(highScore);
+                }
+                if (isFull())
+                {
+                    if(hasLost())
+                        lose = true;
                 }
             }
         }
@@ -257,14 +302,56 @@ namespace Proyecto6to.Scenes
         }
         // Arriba derecha
         private bool Move1() {
-            return false;
+            bool wasMoved = false;
+            int tileVal = 0;
+            for(int i = 3; i >= 0; i--) {
+                for(int j = 0; j < 4; j++) {
+                    if(tileNumber[i,j] != -1) {
+                        if (i != 0 && j != 3) {
+                            for (int k = 1; k < 4; k++) {
+                                try  {
+                                    if (tileNumber[i - k, j + k] != -1) {
+                                        if (tileNumber[i, j] == tileNumber[i - k, j + k]) {
+                                            tileNumber[i, j]++;
+                                            tileNumber[i - k, j + k] = -1;
+                                            score += tileNumber[i, j];
+                                            wasMoved = true;
+                                        }
+                                        k = 5;
+                                    }
+                                    
+                                }
+                                catch (Exception e)
+                                {
+                                    k = 5;
+                                }
+                            }
+                        }
+                        if(i != 3 && j != 0) {
+                            tileVal = tileNumber[i, j];
+                            for (int k = 1; k < 4; k++) {
+                                try {
+                                    if (tileNumber[i + k, j - k] == -1) {
+                                        tileNumber[i + k, j - k] = tileVal;
+                                        tileNumber[i + k - 1, j - k + 1] = -1;
+                                        wasMoved = true;
+                                    }
+                                    else {
+                                        break;
+                                    }
+
+                                }
+                                catch (Exception e) {
+                                    k = 5;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            return wasMoved;
         }
-        /*
-       0,0    1,0    2,0    3,0
-       0,1    1,1    2,1    3,1
-       0,2    1,2    2,2    3,2
-       0,3    1,3    2,3    3,3
-       */
         // Arriba
         private bool Move2() {
             int k, tileVal;
@@ -383,7 +470,53 @@ namespace Proyecto6to.Scenes
         }
         // Abajo izquierdo
         private bool Move5() {
-            return false;
+            bool wasMoved = false;
+            int tileVal = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 3; j >= 0; j--) {
+                    if (tileNumber[i, j] != -1) {
+                        if (i != 3 && j != 0) {
+                            for (int k = 1; k < 4; k++) {
+                                try {
+                                    if (tileNumber[i + k, j - k] != -1) {
+                                        if (tileNumber[i, j] == tileNumber[i + k, j - k]) {
+                                            tileNumber[i, j]++;
+                                            tileNumber[i + k, j - k] = -1;
+                                            score += tileNumber[i, j];
+                                            wasMoved = true;
+                                        }
+                                        k = 5;
+                                    }
+
+                                }
+                                catch (Exception e) {
+                                    k = 5;
+                                }
+                            }
+                        }
+                        if (i != 0 && j != 3) {
+                            tileVal = tileNumber[i, j];
+                            for (int k = 1; k < 4; k++) {
+                                try {
+                                    if (tileNumber[i - k, j + k] == -1) {
+                                        tileNumber[i - k, j + k] = tileVal;
+                                        tileNumber[i - k + 1, j + k - 1] = -1;
+                                        wasMoved = true;
+                                    }
+                                    else {
+                                        break;
+                                    }
+                                }
+                                catch (Exception e) {
+                                    k = 5;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            return wasMoved;
         }
         // Abajo
         private bool Move6() {

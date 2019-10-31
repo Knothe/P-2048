@@ -12,10 +12,8 @@ namespace Proyecto6to
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D bg;
         Scenes.Menu menu;
         Scenes.GameState game;
-        string _fileName = "scores";
         enum GameState
         {
             MainMenu,
@@ -54,8 +52,7 @@ namespace Proyecto6to
         {
             
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            bg = Content.Load<Texture2D>("Background");
+            spriteBatch = new SpriteBatch(GraphicsDevice);  
             menu.Load(this);
             game.Load(this);
             // TODO: use this.Content to load your game content here

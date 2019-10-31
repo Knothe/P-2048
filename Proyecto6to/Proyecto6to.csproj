@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="ModifySaveFile.cs" />

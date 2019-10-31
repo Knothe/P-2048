@@ -6,6 +6,8 @@
   <SourceFiles>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Background.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/File.spritefont</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/GameOverScreen.png</File>
+    <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/GameOverScreen2.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/IconTest.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load.png</File>
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Load2.png</File>
@@ -40,6 +42,8 @@
     <File>D:/Documents/Universidad/Trimestre6/POOIII/Practicas/Proyecto6to/Proyecto6to/Content/Tile9.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
