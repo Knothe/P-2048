@@ -119,8 +119,11 @@ namespace Proyecto6to
         private void SetRandomTile()
         {
             int tileN = 0;
-            tileN = score / 200;
+            tileN = score / 100;
+            if (tileN > 20)
+                tileN = 20;
             Random r = new Random();
+            int randomNum = 0;
             bool wasAdded = false;
             int x, y;
             while (!wasAdded)
@@ -129,7 +132,25 @@ namespace Proyecto6to
                 y = r.Next(0, 4);
                 if (tileNumber[x, y] == -1)
                 {
-                    tileNumber[x, y] = r.Next(0, tileN + 1);
+                    randomNum = r.Next(0, tileN + 1);
+                    if (randomNum >= 0 && randomNum <= 4)
+                        tileNumber[x, y] = 0;
+                    else if (randomNum >= 5 && randomNum <= 7)
+                        tileNumber[x, y] = 1;
+                    else if (randomNum >= 8 && randomNum <= 10)
+                        tileNumber[x, y] = 2;
+                    else if (randomNum >= 11 && randomNum <= 13)
+                        tileNumber[x, y] = 3;
+                    else if (randomNum == 14 && randomNum == 15)
+                        tileNumber[x, y] = 4;
+                    else if (randomNum == 16 && randomNum == 17)
+                        tileNumber[x, y] = 5;
+                    else if (randomNum == 18)
+                        tileNumber[x, y] = 6;
+                    else if (randomNum == 19)
+                        tileNumber[x, y] = 7;
+                    else if (randomNum == 20)
+                        tileNumber[x, y] = 8;
                     wasAdded = true;
                 }
             }
